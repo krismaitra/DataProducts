@@ -1,0 +1,50 @@
+---
+title: "Educational Institution Characteristics"
+author: "Krishanu Maitra"
+date: "3 October 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## US Colleges Info
+### Location, address and type (public/private)
+For institutions that were active in 2017
+
+**Zoom in on the map for detailed view and zoom out for overview**
+```{r,warning=FALSE,message=FALSE}
+library(dplyr)
+```
+```{r,warning=FALSE,message=FALSE}
+dat <- unzip("HD2017.zip") %>% read.csv(as.is = TRUE) %>%
+    filter(ACT == "A ") %>%
+    mutate(TYPE = ifelse(CONTROL == 1, "Public", 
+                         ifelse(CONTROL == -3, "Unknown", "Private"))) %>%
+    select(c("INSTNM","ADDR","CITY","STABBR","ZIP"
+             ,"WEBADDR","LONGITUD","LATITUDE", "TYPE")) %>%
+    mutate(ADDR = paste(ADDR, CITY, STABBR, ZIP, sep = ", ")) %>%
+    select(c("INSTNM","ADDR","WEBADDR","LONGITUD","LATITUDE", "TYPE")) %>%
+    mutate(WEBADDR = paste0(" <a href='http://",WEBADDR,"'>",WEBADDR,"</a>"))
+```
+
+```{r,warning=FALSE,message=FALSE}
+library(leaflet)
+colorFactors = colorFactor(c('blue', 'green', 'red'),                          domain = dat$TYPE)
+my_map <- data.frame(lat = as.numeric(dat$LATITUDE), 
+                     lng = as.numeric(dat$LONGITUD),
+                     stringsAsFactors = FALSE) %>%
+    leaflet() %>% 
+    addTiles() %>% 
+    addCircleMarkers(clusterOptions = markerClusterOptions(), 
+               color = colorFactors(dat$TYPE),
+               popup = paste(dat$INSTNM, dat$ADDR, dat$WEBADDR, 
+                             sep = "<BR>")) %>%
+    addLegend(position = "topright", 
+              colors = c("red", "blue", "black"),
+              labels = c("Public", "Private", "Unknown"))
+my_map
+```
+
+_Data Source: NCES IPEDS Institutional Charactersitics Dataset, 2017, can be downloaded from [here]("https://nces.ed.gov/ipeds/use-the-data") _
