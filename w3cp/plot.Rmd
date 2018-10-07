@@ -1,0 +1,23 @@
+---
+title: "Week 3 Assignment"
+author: "Krishanu Maitra"
+date: "7 October 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Interactive 3-D scatterplot using Plotly | Plot of the R `iris` dataset
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+library(plotly)
+```
+```{r iris_plot,message=FALSE,warning=FALSE}
+plot_ly(iris, x = ~Sepal.Length, y = ~Sepal.Width, z = ~Petal.Length,
+        size = ~Petal.Width, color = ~factor(Species), type = "scatter3d")
+```
+
+***
+<BR><BR><BR><BR><BR><BR><BR>
+<p align="centre"><font size="30">Thank you!</font></p>
