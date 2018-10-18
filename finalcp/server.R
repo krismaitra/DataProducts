@@ -27,13 +27,11 @@ shinyServer(function(input, output){
       hp = c(array(rep(minhp, 5)),
              seq(minhp, maxhp, length.out = 5),
              array(rep(maxhp, 5)),
-             seq(maxhp, minhp, length.out = 5)
-),
+             seq(maxhp, minhp, length.out = 5)),
       wt = c(seq(minwt, maxwt, length.out = 5),
              array(rep(maxwt, 5)),
              seq(maxwt, minwt, length.out = 5),
-             array(rep(minwt, 5))
-),
+             array(rep(minwt, 5))),
       am = array(rep(amInput, 20))
     )
     rplane <- predict(fit, newdata = df)

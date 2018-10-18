@@ -2,7 +2,7 @@ library(shiny)
 library(datasets)
 library(plotly)
 shinyUI(fluidPage(
-  titlePanel("Predict Car Fuel Economy (MPG) from horsepower, weight and transmission type"),
+  titlePanel("Car fuel economy predictor"),
   sidebarLayout(
     sidebarPanel(
       sliderInput("sliderHP", "What is the horse-power of the car?", 
@@ -17,9 +17,31 @@ shinyUI(fluidPage(
       submitButton("Submit")
     ),
     mainPanel(
-      plotlyOutput("plot1"),
-      h3("Predicted miles per gallon (mpg):"),
-      textOutput("pred")
+      plotlyOutput("plot1")
+    )
+  ),
+  fluidRow(
+    column(4,
+           h3("Predicted miles per gallon (mpg):")
+    ),
+    column(4,
+          h3( textOutput("pred"))
+    )
+  ),
+  fluidRow(
+    column(12,
+      h3(""),
+      h4("How to use this application"),
+      p("This Shiny app predicts Car Fuel Economy given by miles per gallon (MPG) 
+        from horsepower, weight and transmission type. In the app interface, 
+        please select the sliders to select the horsepower and the weight of the car 
+        and select the transmission type of the car using the dropdown and click Submit."),
+      p("The app shows some initial parameter values and outcomes at the time
+        it gets loaded. The parameters can be changed according to the details
+        above and the prediction for a new set of inputs are shown at the runtime.
+        To see the 3D plot, you must have a browser that supports 3D plots.
+        Also, the application takes a few seconds to show the output, 
+        so please be patient with it.")
     )
   )
 ))
