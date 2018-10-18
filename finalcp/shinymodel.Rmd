@@ -60,10 +60,16 @@ abline(h = 0, col = "red", lty = "dashed")
 Residual errors in narrow range, almost normally distributed
 
 ***
-<BR><BR><BR>
-The model charactersistics suggest that it is a reasonably good model to predict fuel economy.
+<BR>
+The model charactersistics suggest that it is a reasonably good model to predict fuel economy
+<BR><BR>
+The Shiny app uses this model to make its predictions
+<BR><BR>
+It has a simple user interface and fantastic visualization
 <BR><BR>
 Please do give it a try.
+<BR><BR>
+**Please note:** The app may take some time to load the initial plot
 <BR><BR><BR>
 <font color="#5555FF" size="20">Thank you</font>
 <BR><BR><BR>
